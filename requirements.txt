@@ -1,3 +1,2 @@
 spotipy==2.21.0
-telebot==0.0.4
 pytube==12.1.0
