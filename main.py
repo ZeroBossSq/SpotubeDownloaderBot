@@ -19,7 +19,7 @@ class Audio:
 
 
 bot = telebot.TeleBot(env.TELEGRAM_BOT_TOKEN)
-s_client = SpotiClient(client_id=env.SPOTIFY_CLIENT_ID, client_secret=env.SPOTIFY_CLIENT_TOKEN)
+s_client = SpotiClient(client_id=env.SPOTIPY_CLIENT_ID, client_secret=env.SPOTIPY_CLIENT_TOKEN)
 start_markup = telebot.types.InlineKeyboardMarkup(row_width=2)
 start_markup.add(
     telebot.types.InlineKeyboardButton('Donate 💎', callback_data='donate'),
