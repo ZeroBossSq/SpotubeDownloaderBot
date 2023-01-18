@@ -9,7 +9,10 @@ import telebot
 
 import env
 from Track.track import SpotiClient
+from backgrounds import start_keeping
 # from database import db
+
+start_keeping()
 
 
 class Audio:
