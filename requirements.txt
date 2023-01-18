@@ -1,2 +1,4 @@
 spotipy==2.21.0
 pytube==12.1.0
+requests==2.27.1
+mysql-connector-python==8.0.29
