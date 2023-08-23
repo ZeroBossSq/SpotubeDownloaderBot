@@ -3,9 +3,13 @@ from datetime import datetime
 from os import remove
 import json
 import requests
+from os import remove, getenv
+from sys import getsizeof
+import zlib
 
 import pytube
 import telebot
+import pickle
 
 import env
 from Track.track import SpotiClient
@@ -74,9 +78,25 @@ def get_audio_by_full_name(track_full_name: str) -> Audio | None:
 
 @bot.message_handler(commands=['start', 'help'])
 def start(msg: telebot.types.Message):
+    markup = telebot.types.InlineKeyboardMarkup(row_width=2)
+    markup.add(
+        telebot.types.InlineKeyboardButton('Donate 💎', callback_data='donate'),
+        telebot.types.InlineKeyboardButton('Support 🧰', url='https://t.me/ZXBTLKXC')
+    )
+
     bot.send_message(msg.chat.id, "Hi! 👋\n"
                                   "I'm a bot 🤖 downloads music from spotify 🎧 and youtube 🎬 that's under 5️⃣ minutes long!\n"
                                   "Just send me link to the track and I'll download it for you! ✨", reply_markup=start_markup)
+
+
+@bot.message_handler(commands=['test'])
+def test(msg: telebot.types.Message):
+    test_msg = bot.send_photo(msg.chat.id, open('1.png', 'rb').read())
+
+    before = pickle.dumps(test_msg)
+    after = zlib.compress(before, zlib.Z_BEST_COMPRESSION)
+
+    bot.delete_message(test_msg.chat.id, pickle.loads(zlib.decompress(after)).message_id)
 
 
 @bot.message_handler()
