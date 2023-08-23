@@ -1,28 +1,18 @@
 from urllib.request import urlopen
 from spotipy.client import Spotify
-from spotipy.oauth2 import SpotifyClientCredentials
 
 
-class SpotiClient:
-    def __init__(self, client_id: str, client_secret: str):
-        self.credentials = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
-        self.spotify_client = Spotify(auth_manager=self.credentials)
-
-    def get_track(self, url: str):
-        return SpotiTrack(spotify_client=self.spotify_client, url=url)
-
-
-class SpotiTrack:
+class SpotifyTrackInfo:
     def __init__(self, spotify_client: Spotify, url: str):
         self.url = url
 
         track: dict = spotify_client.track(self.url)
-        alb_imgs = [i.get('url') for i in track.get('album').get('images')]
+        album_images = [i.get('url') for i in track.get('album').get('images')]
 
         self.name = track.get('name')
-        self.album_imgs = SpotifyTrackImages(url_small=alb_imgs[2],
-                                             url_medium=alb_imgs[1],
-                                             url_large=alb_imgs[0])
+        self.album_images = SpotifyTrackImages(url_small=album_images[2],
+                                               url_medium=album_images[1],
+                                               url_large=album_images[0])
         self.artists = [i.get('name') for i in track.get('artists')]
         self.duration = round(float(track["duration_ms"]) / 1000 / 60, 1)  # round to 1 num after .
         self.full_name = f'{self.name} - {", ".join(self.artists)}'
