@@ -1,6 +1,7 @@
 import os
 
 TOKEN = os.getenv('zwy_spotify_tg_bot')
+DB_FN = 'db.sql'
 
 # telegram
 OWNER_ID = 880708503

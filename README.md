@@ -2,18 +2,17 @@
 ## SpotubeDownloaderBot
 
 <p align="center">
-    <img src="https://img.shields.io/badge/python-3.10-green?logo=python&logoColor=white&style=for-the-badge">
+    <img src="https://img.shields.io/badge/python-3.11-green?logo=python&logoColor=white&style=for-the-badge">
     <img src="https://img.shields.io/badge/LICENSE-MIT-green?style=for-the-badge">
     <img src="https://img.shields.io/github/languages/code-size/ZeroBossSq/SpotubeDownloaderBot?style=for-the-badge">
-    <img alt="Website" src="https://img.shields.io/website?down_color=red&down_message=offline&label=status&style=for-the-badge&up_color=blue&up_message=online&url=https%3A%2F%2FSpotifyDownloader.zxbtlkxc.repl.co">
 </p>
 
-A bot written in aiogram to download music from spotify or youtube, not using a conditional "quick track send" system
+A bot written in aiogram to download music from spotify or youtube, using a conditional "quick track send" system. Tracks and their names are stored in the db, and they will be sent in case of name requests that are in the db.
 
 ## Setup and Dependencies
 * Clone the repository:
 ```
-git clone https://github.com/ZeroBossSq/SpotubeDownloaderBot
+git clone https://github.com/Zwylair/SpotubeDownloaderBot
 ```
 
 * Install the dependencies:

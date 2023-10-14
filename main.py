@@ -23,7 +23,7 @@ async def start(message: aiogram.types.Message):
     markup = aiogram.types.InlineKeyboardMarkup(row_width=1)
     markup.add(
         # aiogram.types.InlineKeyboardButton('Donate 💎', callback_data='donate'),
-        aiogram.types.InlineKeyboardButton('Support 🧰', url='https://t.me/Zwylair')
+        aiogram.types.InlineKeyboardButton('Support 🧰', url='https://t.me/zwylair')
     )
 
     text = "Hi! 👋\n" \
