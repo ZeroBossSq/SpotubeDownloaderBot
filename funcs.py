@@ -9,7 +9,7 @@ async def justify_track_fn(full_track_fn: str):
     return ''.join([i for i in list(full_track_fn) if i in f'{string.ascii_letters} -']).replace(' ', '_')
 
 
-async def download_file(request_url: str, storage: io.BytesIO | None = None) -> io.BytesIO:
+async def download_file(request_url: str, storage: io.BytesIO or None = None) -> io.BytesIO:
     storage = io.BytesIO() if storage is None else storage
     storage.seek(0)
 
@@ -21,7 +21,7 @@ async def download_file(request_url: str, storage: io.BytesIO | None = None) -> 
     return storage
 
 
-async def search_track_info_in_db(full_track_name: str) -> io.BytesIO | None:
+async def search_track_info_in_db(full_track_name: str) -> io.BytesIO or None:
     with sqlite3.connect(settings.DB_FN) as sql:
         cursor = sql.cursor()
         res = cursor.execute(f'SELECT * FROM tracks WHERE full_name="{full_track_name}"').fetchone()
