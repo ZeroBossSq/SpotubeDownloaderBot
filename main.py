@@ -6,6 +6,9 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import message_handler
 import error_handler
 import settings
+import backgrounds
+
+backgrounds.start_keeping()
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='[%(asctime)s | %(levelname)s | %(name)s]: %(message)s')
