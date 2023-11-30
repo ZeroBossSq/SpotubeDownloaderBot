@@ -15,7 +15,7 @@ def auto_ping():
     time.sleep(15)
 
     while True:
-        time.sleep(random.randint(3 * 60, 5 * 60))
+        time.sleep(60)
         requests.get('http://127.0.0.1:80')
 
 
