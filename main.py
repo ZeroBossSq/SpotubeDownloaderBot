@@ -9,10 +9,10 @@ from spotipy.oauth2 import SpotifyClientCredentials
 import message_handler
 import error_handler
 import settings
+import backgrounds
 import zwyFramework
 
-server = zwyFramework.pinger.PingServer('0.0.0.0', 80)
-client = zwyFramework.pinger.PingClient('http://127.0.0.1', 80)
+backgrounds.start_keeping()
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='[%(asctime)s | %(levelname)s | %(name)s]: %(message)s')
@@ -41,9 +41,6 @@ async def start(message: aiogram.types.Message):
 
 
 async def main():
-    server.run()
-    client.run()
-
     wipe_db = False
     sql = sqlite3.connect(settings.DB_FN)
     got_dumps = [i.to_string() for i in zwyFramework.get_sqlite_dumps(sql.cursor())]
