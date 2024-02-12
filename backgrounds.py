@@ -1,22 +1,23 @@
-import random
 import time
-
-import requests
-from flask import Flask
-from threading import Thread
+import random
 import logging
+from threading import Thread
+import requests
+import fake_useragent
+from flask import Flask
 
-log = logging.getLogger('logger')
-log.setLevel(logging.ERROR)
+logger = logging.getLogger('logger')
+logger.setLevel(logging.ERROR)
+useragent = fake_useragent.UserAgent()
 app = Flask('')
 
 
 def auto_ping():
-    time.sleep(15)
-
     while True:
-        time.sleep(60)
-        requests.get('http://127.0.0.1:80')
+        headers = {'user-agent': useragent.random}
+
+        time.sleep(random.randint(10, 25))
+        requests.get('http://0.0.0.0:80', headers=headers)
 
 
 @app.route('/')
