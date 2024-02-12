@@ -1,8 +1,8 @@
 import io
 from datetime import datetime
-import traceback
 import aiogram
 import settings
+import zwyFramework
 
 
 async def error_handler(update: aiogram.types.Update, exception: BaseException):
@@ -26,10 +26,8 @@ async def error_handler(update: aiogram.types.Update, exception: BaseException):
         reply_markup=markup
     )
 
-    formatted_exception = traceback.format_exception(type(exception), exception, exception.__traceback__)
-    formatted_exception_str = ''.join(formatted_exception)
-
-    i_f = aiogram.types.InputFile(io.BytesIO(formatted_exception_str.encode()))
+    formatted_exception = zwyFramework.utils.format_exception(exception)
+    i_f = aiogram.types.InputFile(io.BytesIO(formatted_exception.encode()))
     i_f.filename = 'traceback.log'
 
     await bot.send_document(

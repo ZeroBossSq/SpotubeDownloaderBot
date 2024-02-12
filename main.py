@@ -1,14 +1,18 @@
 import asyncio
 import logging
+import os
+import sqlite3
+
 import aiogram
 from spotipy.client import Spotify
 from spotipy.oauth2 import SpotifyClientCredentials
 import message_handler
 import error_handler
 import settings
-import backgrounds
+import zwyFramework
 
-backgrounds.start_keeping()
+server = zwyFramework.pinger.PingServer('0.0.0.0', 80)
+client = zwyFramework.pinger.PingClient('http://127.0.0.1', 80)
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(format='[%(asctime)s | %(levelname)s | %(name)s]: %(message)s')
@@ -37,6 +41,30 @@ async def start(message: aiogram.types.Message):
 
 
 async def main():
+    server.run()
+    client.run()
+
+    wipe_db = False
+    sql = sqlite3.connect(settings.DB_FN)
+    got_dumps = [i.to_string() for i in zwyFramework.get_sqlite_dumps(sql.cursor())]
+
+    if not got_dumps:
+        wipe_db = True
+
+    for got, original in zip(got_dumps, settings.DB_DUMPS):
+        if got != original:
+            wipe_db = True
+            break
+
+    if wipe_db:
+        sql.close()
+        os.remove(settings.DB_FN)
+
+        with sqlite3.connect(settings.DB_FN) as sql:
+            for i in settings.DB_DUMPS:
+                sql.execute(i)
+            sql.commit()
+
     me = await bot.get_me()
 
     error_handler.setup(dp)

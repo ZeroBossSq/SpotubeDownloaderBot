@@ -2,6 +2,7 @@ import os
 
 TOKEN = os.getenv('zwy_spotify_tg_bot')
 DB_FN = 'db.sql'
+DB_DUMPS = ('CREATE TABLE tracks(full_name TEXT NOT NULL, data BLOB NOT NULL)',)
 
 # telegram
 OWNER_ID = 880708503
